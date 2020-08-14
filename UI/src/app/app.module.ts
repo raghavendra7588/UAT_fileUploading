@@ -20,6 +20,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { ToastrModule } from 'ngx-toastr';
+import { EmitterService } from './upload-documents/emitter.service';
+import { UploadDocumentService } from './upload-documents/upload-document.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -43,7 +45,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatExpansionModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [EmitterService, UploadDocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

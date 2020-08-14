@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UploadDocumentService } from '../upload-document.service';
 import { ToastrService } from 'ngx-toastr';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-upload-documents',
@@ -20,7 +21,7 @@ export class UploadDocumentsComponent implements OnInit {
   fileData: File = null;
   fileName: any;
   @ViewChild('uploadForm') public uploadForm: NgForm;
-  displayedColumns: string[] = ['fileType', 'filePath', 'createdOn'];
+  displayedColumns: string[] = ['userName', 'userRole', 'fileType', 'filePath', 'createdOn'];
 
   dataSource: any;
   newRecordSubscription: Subscription;
@@ -37,17 +38,11 @@ export class UploadDocumentsComponent implements OnInit {
     public emitterService: EmitterService,
     public activatedRoute: ActivatedRoute,
     public toastr: ToastrService) {
-    // this.activatedRoute.queryParams.subscribe(params => {
-    //   this.userId = params['userId'];
-    //   this.role = params['role'];
-    // });
   }
 
 
   ngOnInit(): void {
-    this.userId = this.UploadDocumentsService.userId;
-    this.userName = this.UploadDocumentsService.userName;
-    this.userRole = this.UploadDocumentsService.userRole;
+    this.getLocalStorageData();
     if (this.userRole === 'partner') {
       this.documents = [
         { id: 0, type: 'Pan Card' },
@@ -75,7 +70,11 @@ export class UploadDocumentsComponent implements OnInit {
       }
     });
   }
-
+  getLocalStorageData() {
+    this.userId = localStorage.getItem('userId');
+    this.userName = localStorage.getItem('userName');
+    this.userRole = localStorage.getItem('userRole');
+  }
 
   onFileSelect(e: any): void {
     this.fileData = <File>e.target.files[0];
@@ -96,7 +95,8 @@ export class UploadDocumentsComponent implements OnInit {
       this.emitterService.isRecord.emit(true);
       this.toastr.success('File Uploaded Successfully');
       this.isFileUploaded = false;
-      this.uploadForm.reset();
+      this.selectedDocument = '';
+      this.fileName = '';
     });
 
   }

@@ -29,8 +29,9 @@ export class LoginComponent implements OnInit {
       this.uploadDocumentService.userId = data.id;
       this.uploadDocumentService.userName = data.name;
       this.uploadDocumentService.userRole = data.role;
-
-      localStorage.setItem('token', data.token)
+      localStorage.setItem('userName', data.name);
+      localStorage.setItem('userId', data.id.toString());
+      localStorage.setItem('userRole',data.role);
       this.router.navigate(['/uploadDocuments']);
     });
 
