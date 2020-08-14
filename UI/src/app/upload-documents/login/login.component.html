@@ -1,0 +1,22 @@
+ <div class="container mt-5 d-flex justify-content-center">
+    <div class="row ">
+        <div class="col-md-4 mr-3">
+            <mat-form-field>
+                <input matInput placeholder="User Name" [(ngModel)]="user.username" autocomplete="off">
+             </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field >
+                <input matInput type="password" placeholder="Password" [(ngModel)]="user.password" autocomplete="off">
+             </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 ml-4 mt-2">
+            <button mat-raised-button (click)="navigateToFileUpload()">Login</button>
+        </div>
+    </div>
+</div>
+
